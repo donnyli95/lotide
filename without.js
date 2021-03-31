@@ -1,3 +1,4 @@
+// Using array methods
 const without = function(source, itemsToRemove) {
   let newArray = [];
   for (let i = 0; i < source.length; i++) {
@@ -8,10 +9,24 @@ const without = function(source, itemsToRemove) {
   return newArray;
 }
 
-// TEST CASES
-console.log(without([1, 2, 3], [1])) // => [2, 3]
+// nothing using array methods
+const without2 = function(source, itemsToRemove) {
+  let newArray = source.slice(0);
+  for (let i = 0; i < itemsToRemove.length; i++) {
+    for (let j = 0; j < newArray.length; j++) {
+      if (newArray[j] === itemsToRemove[i]) {
+        newArray.splice(j, 1);
+      }
+    }
+  }
 
-console.log(without(["1", "2", "3"], [1, 2, "3"])) // => ["1", "2"]
+  return newArray;
+}
+
+// TEST CASES
+console.log(without2([1, 2, 3], [1])) // => [2, 3]
+
+console.log(without2(["1", "2", "3"], [1, 2, "3"])) // => ["1", "2"]
 
 
 // TESTING CODE USAGE
@@ -33,6 +48,6 @@ const assertArraysEqual = function (array1, array2) {
 };
 
 const words = ["hello", "world", "lighthouse"];
-console.log(without(words, ["lighthouse"])); 
+console.log(without2(words, ["lighthouse"])); 
 
 assertArraysEqual(words, ["hello", "world", "lighthouse"]);
